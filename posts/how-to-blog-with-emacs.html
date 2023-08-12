@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="utf-8">
+    <title>
+      umiswing
+      
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    
+    
+    
+  <meta property="og:title" content="How to blog with Emacs">
+  <meta property="og:url" content="https://umiswing.github.io/posts/how-to-blog-with-emacs.html">
+  
+  
+  <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="https://umiswing.github.io/static/style.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora&family=Space+Mono&display=swap" />
+    
+  </head>
+  <body>
+    
+    
+      <header>
+        <h1>
+          <a href="https://umiswing.github.io/">
+            umiswing
+          </a>
+        </h1>
+        <a href="#main" class="visually-hidden">jump to main content</a>
+        <nav>
+          <ul class="menu">
+            <li><a href="https://umiswing.github.io/about">about</a></li>
+            <li><a href="https://umiswing.github.io/">blog</a></li>
+          </ul>
+        </nav>
+      </header>
+    
+
+    
+    <main id="main">
+      
+  <article class="post">
+    <h1 class="post__title">
+      How to blog with Emacs
+    </h1>
+    <section class="post__meta">
+      
+        Aug 12, 2023
+      
+    </section>
+    <section>
+      
+<div id="outline-container-intro" class="outline-2">
+<h2 id="intro">Intro</h2>
+<div class="outline-text-2">
+<p>
+When searing "how to build a personal blog" in google, people always tell you to use hugo framework.
+I try hugo and I don't like it. All I need is just to publish my text shits, not a heavy framework.
+And I like to control everything in my blog.
+However, I know little about html and css, and I don't want to spend time on front end development.
+<a href="https://orgmode.org/">Org Mode</a> comes to my mind. I'm an emacs guy and I love to blog with emacs.
+I guess every one tries to blog with Org Mode has read this <a href="https://orgmode.org/worg/org-blog-wiki.html">post</a>.
+I decide to use <a href="https://emacs.love/weblorg/">weblorg</a>. It's written in elisp so that require no external dependencies.
+And its <a href="https://clarete.li/">sample websites</a> is beautiful.
+</p>
+</div>
+</div>
+<div id="outline-container-weblorg" class="outline-2">
+<h2 id="weblorg">Weblorg</h2>
+<div class="outline-text-2">
+<p>
+Read the <a href="https://emacs.love/weblorg/doc/index.html">official manual</a>. I don't know why I can't run the sample in the manual, but we can refer to <a href="https://github.com/emacs-love/weblorg/tree/main/examples/simpleblog">sample in its source code</a>.
+Remember to clone <a href="https://github.com/clarete/templatel">templatel</a> and add this in your publish.el:
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp">(add-to-list 'load-path "~/.emacs.d/weblorg")
+(add-to-list 'load-path "~/.emacs.d/templatel")
+(require 'weblorg)
+(setq system-time-locale "C") ;; set this if you want english time stamps in org mode
+</pre>
+</div>
+<p>
+Run this and emacs will generate html shits in the output dir.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">emacs --script publish.el
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-apache2" class="outline-2">
+<h2 id="apache2">Apache2</h2>
+<div class="outline-text-2">
+<p>
+I'm too stupid to know how to build a website. Following is for people who is as stupid as me.
+To start a html service on your localhost, you must install apache2.
+Write your config in /etc/apache2.
+</p>
+<ol class="org-ol">
+<li>Read the /etc/apache2/apache2.conf, which is the entry of config.</li>
+</ol>
+</div>
+<div id="outline-container-tl-dr" class="outline-3">
+<h3 id="tl-dr">TL;DR</h3>
+<div class="outline-text-3">
+<ol class="org-ol">
+<li value="2">Search for /var/www, change it to where your weblorg generate html shits.</li>
+<li>Edit ports.conf, change the port if you want.</li>
+<li>Edit sites-available/000-default.conf, once you open it you should know how to modify it.</li>
+<li>Finally, start apache2 using sudo apache2ctl start.</li>
+</ol>
+<p>
+Then, enter localhost:port in your browser, and you will see your blog.
+</p>
+</div>
+</div>
+</div>
+
+    </section>
+  </article>
+
+    </main>
+
+    
+    
+      <footer>
+	Emacs Makes A Computer Slow
+        </a>
+      </footer>
+    
+
+  </body>
+</html>
